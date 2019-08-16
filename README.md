@@ -151,7 +151,31 @@ The code for my perspective transform is defined in the Camera class.  I chose t
 src = np.float32([[433, 563], [866, 563], [1041, 675], [280, 675]])
 dst = np.float32([[280, 565], [1042, 563], [1041, 675], [280, 675]])
 ```
+I used the set_matrix and warp method in the following manner in code cell 6 and 7 of the ipynb notebook:
 
+```python
+import numpy as np
+
+src = np.float32([[433, 563], [866, 563], [1041, 675], [280, 675]])
+dst = np.float32([[280, 565], [1042, 563], [1041, 675], [280, 675]])
+camera.set_matrix(src, dst)
+
+print("\nCamera Warp Matrix M: \n{0}".format(camera.M))
+
+print("\nCamera Inverse Warp Matrix Minv: \n{0}".format(camera.Minv))
+```
+```python
+warped = camera.warp(thresh_filter.combined)
+warped[warped > 0] = 255
+
+# Plotting thresholded images
+f, axes = plt.subplots(1, 2, figsize=(20,10))
+axes[0].set_title('Gradient Filtered')
+axes[0].imshow(thresh_filter.combined, cmap='gray')
+
+axes[1].set_title('Perspective transformed ("birds-eye view")')
+axes[1].imshow(warped, cmap='gray')
+```
 This resulted in the following M and Minv matrices:
 
 ```
@@ -167,7 +191,7 @@ Camera Inverse Warp Matrix Minv:
 ```
 
 
-I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
+I verified that my perspective transform was working as expected by applying it on a thresholded test image to verify that the lines appear parallel in the warped image.
 
 ![alt text][image4]
 
