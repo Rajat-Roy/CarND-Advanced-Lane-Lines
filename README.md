@@ -14,11 +14,13 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 
 [image1]: ./output_images/undistort_output.jpg "undistort_output"
-[image2]: ./test_images/test1.jpg "Road Transformed"
+[image2]: ./test_images/test2.jpg "Road Transformed"
 [image3]: ./examples/binary_combo_example.jpg "Binary Example"
 [image4]: ./examples/warped_straight_lines.jpg "Warp Example"
 [image5]: ./examples/color_fit_lines.jpg "Fit Visual"
 [image6]: ./examples/example_output.jpg "Output"
+
+[image7]: ./output_images/undistorted.jpg "undistorted"
 [video1]: ./project_video.mp4 "Video"
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
@@ -93,6 +95,23 @@ and obtained this result:
 
 To demonstrate this step, I will describe how I apply the distortion correction to one of the test images like this one:
 ![alt text][image2]
+
+Code in cell 4 of the .ipynb contains the code:
+```python
+test_img = mpimg.imread('test_images/test2.jpg')
+undistorted = camera.undistort(test_img)
+
+# Plotting thresholded images
+f, axes = plt.subplots(1, 2, figsize=(20,10))
+axes[0].set_title('Original')
+axes[0].imshow(test_img)
+
+axes[1].set_title('Corrected')
+axes[1].imshow(undistorted)
+```
+and the result is
+
+![alt text][image7]
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 
