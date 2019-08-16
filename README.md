@@ -99,7 +99,7 @@ To demonstrate this step, I will describe how I apply the distortion correction 
 
 ![alt text][image2]
 
-Code in cell 4 of the .ipynb contains the code:
+Code in cell 3 of the .ipynb contains the code:
 ```python
 test_img = mpimg.imread('test_images/signs_vehicles_xygrad.png')
 undistorted = camera.undistort(test_img)
@@ -118,7 +118,11 @@ and the result is
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 
-I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at lines # through # in `another_file.py`).  Here's an example of my output for this step.  (note: this is not actually from one of the test images)
+I used a combination of color and gradient thresholds to generate a binary image.
+Thresholding methods are defined in the Filter class of the "./threshold.py" file.
+It is applied in the cell 4 of the ipynb notebook.
+
+Here's an example of my output for this step.
 
 ![alt text][image3]
 
