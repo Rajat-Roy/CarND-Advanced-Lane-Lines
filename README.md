@@ -39,7 +39,7 @@ You're reading it!
 
 #### 1. Briefly state how you computed the camera matrix and distortion coefficients. Provide an example of a distortion corrected calibration image.
 
-The code for this step is contained in the calibrate method of the Camera class located in [./transformer.py](https://github.com/Rajat-Roy/CarND-Advanced-Lane-Lines/edit/master/transformer.py)
+The code for this step is contained in the calibrate() method of the Camera class located in [./transformer.py](https://github.com/Rajat-Roy/CarND-Advanced-Lane-Lines/edit/master/transformer.py)
 
 ```python
 def calibrate(self, images_path, nx, ny): 
@@ -75,7 +75,7 @@ def calibrate(self, images_path, nx, ny):
 
 I start by preparing "object points", which will be the (x, y, z) coordinates of the chessboard corners in the world. Here I am assuming the chessboard is fixed on the (x, y) plane at z=0, such that the object points are the same for each calibration image.  Thus, `objp` is just a replicated array of coordinates, and `objpoints` will be appended with a copy of it every time I successfully detect all chessboard corners in a test image.  `imgpoints` will be appended with the (x, y) pixel position of each of the corners in the image plane with each successful chessboard detection.  
 
-I then used the output `objpoints` and `imgpoints` to compute the camera calibration and distortion coefficients using the `cv2.calibrateCamera()` function.  I applied this distortion correction to one of the calibration image using the `cv2.undistort()` function which is used in the undistort method of the Camera class:
+I then used the output `objpoints` and `imgpoints` to compute the camera calibration and distortion coefficients using the `cv2.calibrateCamera()` function.  I applied this distortion correction to one of the calibration image using the `cv2.undistort()` function which is used in the undistort() method of the Camera class:
 
 ```python
 # returns the undistorted image (remove lens distortion)
@@ -120,7 +120,7 @@ and the result is
 
 I used a combination of color and gradient thresholds to generate a binary image.
 Thresholding methods are defined in the Filter class of the [./threshold.py](https://github.com/Rajat-Roy/CarND-Advanced-Lane-Lines/edit/master/threshold.py) file.
-It is applied in the cell 4 of the ipynb notebook.
+It is applied in the code cell 4 of the ipynb notebook.
 
 ```python
 import threshold
@@ -151,7 +151,7 @@ The code for my perspective transform is defined in the Camera class.  I chose t
 src = np.float32([[433, 563], [866, 563], [1041, 675], [280, 675]])
 dst = np.float32([[280, 565], [1042, 563], [1041, 675], [280, 675]])
 ```
-I used the set_matrix and warp method in the following manner in code cell 6 and 7 of the ipynb notebook:
+I used the set_matrix() and warp() method in the following manner in code cell 6 and 7 of the ipynb notebook:
 
 ```python
 import numpy as np
@@ -197,10 +197,10 @@ I verified that my perspective transform was working as expected by applying it 
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
-lane-pixel methods are defined in the LaneProcessor class of the  ".\lany.py" file.
+lane-pixel methods are defined in the LaneProcessor class of the  [./lany.py](https://github.com/Rajat-Roy/CarND-Advanced-Lane-Lines/edit/master/lany.py) file.
 I used the find_lane_pixels to find the fist set of lane pixels, which uses the window technique to find pixels from thresholded binary image and fits a second order polynomial.
 
-Then I used the search_around_poly method to find the lane pixels of the subsequent frames using previous fits and get new fits.
+Then I used the search_around_poly() method to find the lane pixels of the subsequent frames using previous fits and get new fits.
 
 To verify that it is working as expected I tested it on a test image in the 7th code cell of the ipynb notebook as follows:
 
@@ -226,7 +226,7 @@ and got the following result:
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
-I defined the measure_curvature_real and curvature_from_fit methods for radius of curvature calculation in the LaneProcessor class.
+I defined the measure_curvature_real() and curvature_from_fit() methods for radius of curvature calculation in the LaneProcessor class.
 
 Code cell 8 of the ipynb notebook demonstrates an example for a test image:
 
@@ -244,7 +244,7 @@ Radius of curvature: 572.65 (m)
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
-I defined a draw method in the LaneProcessor class to draw the lane area onto the undistorted image of the input image.
+I defined a draw() method in the LaneProcessor class to draw the lane area onto the undistorted image of the input image.
 Here is a demonstration of the visual implemented in code cell 9 of the ipynb notebook.
 
 ```python
