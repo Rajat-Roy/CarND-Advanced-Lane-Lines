@@ -197,7 +197,7 @@ I verified that my perspective transform was working as expected by applying it 
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
-lane-pixel methods are defined in the `LaneProcessor` class of the  [./lany.py](https://github.com/Rajat-Roy/CarND-Advanced-Lane-Lines/edit/master/lany.py) file.
+lane-pixel methods are defined in the `LaneProcessor` class of the  [./lane.py](https://github.com/Rajat-Roy/CarND-Advanced-Lane-Lines/edit/master/lane.py) file.
 I used the `find_lane_pixels()` method to find the fist set of lane pixels, which uses the window technique to find pixels from thresholded binary image and fits a second order polynomial.
 
 Then I used the `search_around_poly()` method to find the lane pixels of the subsequent frames using previous fits and get new fits.
