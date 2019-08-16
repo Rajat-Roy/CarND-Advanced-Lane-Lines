@@ -176,7 +176,7 @@ axes[0].imshow(thresh_filter.combined, cmap='gray')
 axes[1].set_title('Perspective transformed ("birds-eye view")')
 axes[1].imshow(warped, cmap='gray')
 ```
-This resulted in the following M and Minv matrices:
+This resulted in the following `M` and `Minv` matrices:
 
 ```
 Camera Warp Matrix M: 
