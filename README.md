@@ -14,7 +14,7 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 
 [image1]: ./output_images/undistort_output.jpg "undistort_output"
-[image2]: ./test_images/test2.jpg "Road Transformed"
+[image2]: ./test_images/signs_vehicles_xygrad.png "Road Transformed"
 [image3]: ./examples/binary_combo_example.jpg "Binary Example"
 [image4]: ./examples/warped_straight_lines.jpg "Warp Example"
 [image5]: ./examples/color_fit_lines.jpg "Fit Visual"
@@ -98,7 +98,7 @@ To demonstrate this step, I will describe how I apply the distortion correction 
 
 Code in cell 4 of the .ipynb contains the code:
 ```python
-test_img = mpimg.imread('test_images/test2.jpg')
+test_img = mpimg.imread('test_images/signs_vehicles_xygrad.png')
 undistorted = camera.undistort(test_img)
 
 # Plotting thresholded images
