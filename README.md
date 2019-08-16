@@ -39,7 +39,7 @@ You're reading it!
 
 #### 1. Briefly state how you computed the camera matrix and distortion coefficients. Provide an example of a distortion corrected calibration image.
 
-The code for this step is contained in the calibrate method of the Camera class located in [./transformer.py](https://github.com/udacity/CarND-Advanced-Lane-Lines/blob/master/transformer.py)
+The code for this step is contained in the calibrate method of the Camera class located in [./transformer.py](https://github.com/Rajat-Roy/CarND-Advanced-Lane-Lines/edit/master/transformer.py)
 
 ```python
 def calibrate(self, images_path, nx, ny): 
