@@ -119,7 +119,7 @@ and the result is
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 
 I used a combination of color and gradient thresholds to generate a binary image.
-Thresholding methods are defined in the Filter class of the "./threshold.py" file.
+Thresholding methods are defined in the Filter class of the [./threshold.py](https://github.com/Rajat-Roy/CarND-Advanced-Lane-Lines/edit/master/threshold.py) file.
 It is applied in the cell 4 of the ipynb notebook.
 
 ```python
