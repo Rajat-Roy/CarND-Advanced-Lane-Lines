@@ -93,7 +93,10 @@ and obtained this result:
 
 #### 1. Provide an example of a distortion-corrected image.
 
-To demonstrate this step, I will describe how I apply the distortion correction to this image (note: this is not actually from one of the test images):
+To demonstrate this step, I will describe how I apply the distortion correction to this image 
+
+(note: this is not actually from one of the test images):
+
 ![alt text][image2]
 
 Code in cell 4 of the .ipynb contains the code:
