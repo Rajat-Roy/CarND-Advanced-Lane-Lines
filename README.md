@@ -145,29 +145,27 @@ Here's an example of my output for this step.
 
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
-The code for my perspective transform includes a function called `warper()`, which appears in lines 1 through 8 in the file `example.py` (output_images/examples/example.py) (or, for example, in the 3rd code cell of the IPython notebook).  The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
+The code for my perspective transform is defined in the Camera class.  I chose to hardcode the source and destination points in the following manner:
 
 ```python
-src = np.float32(
-    [[(img_size[0] / 2) - 55, img_size[1] / 2 + 100],
-    [((img_size[0] / 6) - 10), img_size[1]],
-    [(img_size[0] * 5 / 6) + 60, img_size[1]],
-    [(img_size[0] / 2 + 55), img_size[1] / 2 + 100]])
-dst = np.float32(
-    [[(img_size[0] / 4), 0],
-    [(img_size[0] / 4), img_size[1]],
-    [(img_size[0] * 3 / 4), img_size[1]],
-    [(img_size[0] * 3 / 4), 0]])
+src = np.float32([[433, 563], [866, 563], [1041, 675], [280, 675]])
+dst = np.float32([[280, 565], [1042, 563], [1041, 675], [280, 675]])
 ```
 
-This resulted in the following source and destination points:
+This resulted in the following M and Minv matrices:
 
-| Source        | Destination   | 
-|:-------------:|:-------------:| 
-| 585, 460      | 320, 0        | 
-| 203, 720      | 320, 720      |
-| 1127, 720     | 960, 720      |
-| 695, 460      | 960, 0        |
+```
+Camera Warp Matrix M: 
+[[-6.19878012e-01 -1.53260191e+00  1.03016610e+03]
+ [ 1.00508686e-02 -1.99415747e+00  9.14361435e+02]
+ [ 1.48901756e-05 -2.42895990e-03  1.00000000e+00]]
+
+Camera Inverse Warp Matrix Minv: 
+[[ 1.81208826e-01 -7.74750723e-01  5.21726994e+02]
+ [ 2.84780232e-03 -5.07549263e-01  4.61149763e+02]
+ [ 4.21896640e-06 -1.22128064e-03  1.00000000e+00]]
+```
+
 
 I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
 
