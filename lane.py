@@ -89,7 +89,7 @@ class LaneProcessor:
         return left_curverad, right_curverad
 
     # Calculate the radius of curvature in meters
-    def curvature_fit(self, fit, y_vals, shape):
+    def curvature_from_fit(self, fit, y_vals, shape):
         # Define conversions in x and y from pixels space to meters
         ym_per_pix = 30/shape[0] # meters per pixel in y dimension
         xm_per_pix = 3.7/shape[1] # meters per pixel in x dimension
@@ -130,8 +130,8 @@ class LaneProcessor:
         self.right_line.detected = True
 
         #radius of curvature of the line in meters
-        self.left_line.radius_of_curvature = self.curvature_fit(self.left_line.best_fit, self.lefty, self.binary_warped.shape)
-        self.right_line.radius_of_curvature = self.curvature_fit(self.right_line.best_fit, self.righty, self.binary_warped.shape)
+        self.left_line.radius_of_curvature = self.curvature_from_fit(self.left_line.best_fit, self.lefty, self.binary_warped.shape)
+        self.right_line.radius_of_curvature = self.curvature_from_fit(self.right_line.best_fit, self.righty, self.binary_warped.shape)
 
         # Initialize past value arrays with initial value 
         self.init_line()
@@ -306,22 +306,6 @@ class LaneProcessor:
         ### TO-DO: Calc both polynomials using ploty, left_fit and right_fit ###
         self.left_fitx = self.left_fit[0]*ploty**2 + self.left_fit[1]*ploty + self.left_fit[2]
         self.right_fitx = self.right_fit[0]*ploty**2 + self.right_fit[1]*ploty + self.right_fit[2]
-
-    def curvature_from_fit(fit, y_vals, shape):
-        # Define conversions in x and y from pixels space to meters
-        ym_per_pix = 30/shape[0] # meters per pixel in y dimension
-        xm_per_pix = 3.7/shape[1] # meters per pixel in x dimension
-
-        # x= mx / (my ** 2) *a*(y**2)+(mx/my)*b*y+c from lesson
-        if len(fit)>0:
-            A = xm_per_pix/(ym_per_pix**2)*fit[0]
-            B = (xm_per_pix/ym_per_pix)*fit[1]       
-            f1= 2*A*np.max(y_vals)+B
-            f2 = 2*A   
-            curverad = ((1 + f1**2)**1.5) // np.absolute(f2)
-        else:  
-            curverad = 0
-        return curverad
 
     # Polynomial fit values from the previous frame
     # Make sure to grab the actual values from the previous step in your project!

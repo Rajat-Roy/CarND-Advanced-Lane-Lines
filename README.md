@@ -244,7 +244,24 @@ Radius of curvature: 572.65 (m)
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
-I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
+I defined a draw method in the LaneProcessor class to draw the lane area onto the undistorted image of the input image.
+Here is a demonstration of the visual implemented in code cell 9 of the ipynb notebook.
+
+```python
+laneProcessor.draw_img(camera.Minv)
+result =laneProcessor.out_img
+
+
+# Plotting thresholded images
+f, axes = plt.subplots(1, 2, figsize=(20,10))
+axes[0].set_title('Original')
+axes[0].imshow(undistorted)
+
+axes[1].set_title('Detected Lane Area')
+axes[1].imshow(result)
+```
+
+The result is :
 
 ![alt text][image6]
 
@@ -255,7 +272,9 @@ I implemented this step in lines # through # in my code in `yet_another_file.py`
 #### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
 
 Here's a [link to my video result](./project_video.mp4)
-
+<video width =960 height=540 controls>
+  <source src="./project_video.mp4">
+</video>
 ---
 
 ### Discussion
