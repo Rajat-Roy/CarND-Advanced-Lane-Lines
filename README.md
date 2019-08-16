@@ -197,7 +197,30 @@ I verified that my perspective transform was working as expected by applying it 
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
-Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
+lane-pixel methods are defined in the LaneProcessor class of the  ".\lany.py" file.
+I used the find_lane_pixels to find the fist set of lane pixels, which uses the window technique to find pixels from thresholded binary image and fits a second order polynomial.
+
+Then I used the search_around_poly method to find the lane pixels of the subsequent frames using previous fits and get new fits.
+
+To verify that it is working as expected I tested it on a test image in the 7th code cell of the ipynb notebook as follows:
+
+```python
+import lane
+import cv2
+laneProcessor = lane.LaneProcessor()
+laneProcessor.detect_lane(undistorted, warped)
+lane_pixels = laneProcessor.out_img
+
+# Plotting thresholded images
+f, axes = plt.subplots(1, 2, figsize=(20,10))
+axes[0].set_title('Warped')
+axes[0].imshow(warped, cmap='gray')
+
+axes[1].set_title('Lane Pixels')
+axes[1].imshow(lane_pixels)
+```
+
+and got the following result:
 
 ![alt text][image5]
 
