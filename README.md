@@ -290,7 +290,7 @@ For some reason I was not satisfied with the thresholding of only S channel of t
 I found the `Screen Blending` to be most useful. 
 This [page](http://www.deepskycolors.com/archive/2010/04/21/formulas-for-Photoshop-blending-modes.html) provided me with the formula:
 
-1 - (1-Target) * (1-Blend)
+```1 - (1-Target) * (1-Blend)```
 
 The code is in the `Filter` class.
 
