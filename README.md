@@ -280,3 +280,68 @@ Here's a [link to my video result](./project_video.mp4)
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
 Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further. 
+
+Although most of the functionalities were taken from chapter quizzes, some of the techniques had to be re adjusted for a better result.
+
+#### Color thresholding
+
+For some reason I was not satisfied with the thresholding of only S channel of the image. I opened up photoshop and played around and found that except for extreme cases S and L channel together produces a better thresholding when used with some specific image blending.
+
+I found the `Screen Blending` to be most useful. 
+This [page](http://www.deepskycolors.com/archive/2010/04/21/formulas-for-Photoshop-blending-modes.html) provided me with the formula:
+
+1 - (1-Target) * (1-Blend)
+
+The code is in the `Filter` class.
+
+```python
+def color_transform(self, img):
+    hls = cv2.cvtColor(img, cv2.COLOR_RGB2HLS)
+    hls = cv2.normalize(hls, None, alpha = 0, beta = 1, norm_type = cv2.NORM_MINMAX, dtype = cv2.CV_32F)
+    L = np.zeros_like(hls[:,:,1])
+    S = np.zeros_like(hls[:,:,2])
+
+    Blend = np.zeros_like(hls)
+    Target = np.zeros_like(hls)
+
+    saturation = np.mean(hls[:,:,2])
+
+    if saturation > 0.25:
+        L[hls[:,:,1] > 0.93] = 1
+        S[hls[:,:,2] > 0.7] = 1
+    elif (saturation < 0.25) & (saturation > 0.15):
+        L[hls[:,:,1] > 0.7] = 1
+        S[hls[:,:,2] > 0.4] = 1
+    else:
+        L[hls[:,:,1] > 0.7] = 1
+        S[hls[:,:,2] > 0.4] = 1
+
+    Target = cv2.cvtColor(S,cv2.COLOR_GRAY2RGB)
+    Blend = cv2.cvtColor(L,cv2.COLOR_GRAY2RGB)
+
+    #Screen Blending: http://www.deepskycolors.com/archive/2010/04/21/formulas-for-Photoshop-blending-modes.html
+    Composite = 1 - (1-Target) * (1-Blend)
+    Composite = cv2.normalize(Composite, None, alpha = 0, beta = 1, norm_type = cv2.NORM_MINMAX, dtype = cv2.CV_32F)
+    self.color_transformed = cv2.cvtColor(Composite, cv2.COLOR_RGB2GRAY)
+```
+
+#### Averaging data of previous frames
+
+When using prior frames for extrapolation of n fits and n last lane positions, I found that for the first n frames I had to fill up rest of the un-processed n values upto the data available.
+
+For example:
+*if data upto frame 1 is available fill 1st and rest (n-1)th data with frame 1 data
+*if data upto frame 2 is available fill frame 1 and frame 2 data in 1st and 2nd field and then copy frame 2 data to the rest of (n-2) fields
+*and so on ...
+
+#### Limitations of the pipeline
+This pipeline tends to fail in the following situations:
+*Low lights like at night, under bridges, inside tunnels or heavy cloud
+*Poorly  paited lanes
+*Zigzag curvy roads (like snakes)
+
+#### Further improvements
+This pipeline can definitely be improved by following considerations:
+* Use of better thresholding
+* Pluging in deep learning
+* Use of stronger polynomial fits
