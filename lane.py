@@ -44,6 +44,7 @@ class LaneProcessor:
         self.binary_warped = None
         self.out_img = None
         self.out_frame = None
+        self.vehicle_position = 0
         
         # Create line objects for tracking
         self.left_line = Line()
@@ -369,7 +370,7 @@ class LaneProcessor:
 
         # Print Radius of Curvature
         font                   = cv2.FONT_HERSHEY_SIMPLEX
-        bottomLeftCornerOfText = ((self.image.shape[1]//2),50)
+        bottomLeftCornerOfText = ((self.image.shape[1]//8),50)
         fontScale              = 0.8
         fontColor              = (255,255,255)
         lineType               = 2
@@ -382,15 +383,25 @@ class LaneProcessor:
             lineType)
 
         # Print Position
-        car_position = np.absolute(self.right_line.line_base_pos - self.left_line.line_base_pos)
+        width_of_lane = np.mean(self.right_line.bestx - self.left_line.bestx) # in pixels
+        center_of_vehicle = self.binary_warped.shape[1]/2 # in pixels
+        middle_of_lane = self.right_line.bestx - width_of_lane/2
+        # distance of vehicle from lane centre
+        distance = (center_of_vehicle - np.mean(middle_of_lane))*(3.7/self.binary_warped.shape[1]) # in meters
+        
+        if distance > 0:
+            car_position = '{0:.2f} (m) right'.format(np.absolute(distance))
+        else:
+            car_position = '{0:.2f} (m) left'.format(np.absolute(distance))
+            
         font                   = cv2.FONT_HERSHEY_SIMPLEX
-        bottomLeftCornerOfText = ((self.image.shape[1]//5),50)
+        bottomLeftCornerOfText = ((self.image.shape[1]*4//8),50)
         fontScale              = 0.8
         fontColor              = (255,255,255)
         lineType               = 2
 
 
-        cv2.putText(result, 'Vehicle position: {0:.2f} (m)'.format(car_position), 
+        cv2.putText(result, 'Vehicle position: {}'.format(car_position), 
             bottomLeftCornerOfText, 
             font, 
             fontScale,

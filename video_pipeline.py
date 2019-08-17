@@ -49,6 +49,6 @@ def execute():
     
     out_clip = clip1.fl_image(lambda image: process_image(image, laneProcessor,
                                                           camera, 
-                                                          thres_filter)).subclip(40,45)#NOTE: this function expects color images!!
+                                                          thres_filter))#.subclip(40,45)#NOTE: this function expects color images!!
     out_clip.write_videofile(output, audio=False)
     return output
