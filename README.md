@@ -41,7 +41,7 @@ You're reading it!
 
 #### 1. Briefly state how you computed the camera matrix and distortion coefficients. Provide an example of a distortion corrected calibration image.
 
-The code for this step is contained in the `calibrate()` method of the `Camera` class located in [./transformer.py](https://github.com/Rajat-Roy/CarND-Advanced-Lane-Lines/edit/master/transformer.py)
+The code for this step is contained in the `calibrate()` method of the `Camera` class located in [./transformer.py](https://github.com/Rajat-Roy/CarND-Advanced-Lane-Lines/blob/master/transformer.py)
 
 ```python
 def calibrate(self, images_path, nx, ny): 
@@ -121,7 +121,7 @@ and the result is
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 
 I used a combination of color and gradient thresholds to generate a binary image.
-Thresholding methods are defined in the `Filter` class of the [./threshold.py](https://github.com/Rajat-Roy/CarND-Advanced-Lane-Lines/edit/master/threshold.py) file.
+Thresholding methods are defined in the `Filter` class of the [./threshold.py](https://github.com/Rajat-Roy/CarND-Advanced-Lane-Lines/blob/master/threshold.py) file.
 It is applied in the code cell 4 of the ipynb notebook.
 
 ```python
@@ -199,7 +199,7 @@ I verified that my perspective transform was working as expected by applying it 
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
-Lane-pixel methods are defined in the `LaneProcessor` class of the  [./lane.py](https://github.com/Rajat-Roy/CarND-Advanced-Lane-Lines/edit/master/lane.py) file.
+Lane-pixel methods are defined in the `LaneProcessor` class of the  [./lane.py](https://github.com/Rajat-Roy/CarND-Advanced-Lane-Lines/blob/master/lane.py) file.
 I used the `find_lane_pixels()` method to find the fist set of lane pixels, which uses the window technique to find pixels from thresholded binary image and fits a second order polynomial.
 
 Then I used the `search_around_poly()` method to find the lane pixels of the subsequent frames using previous fits and get new fits.
