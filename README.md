@@ -336,9 +336,9 @@ For example:
 
 #### Limitations of the pipeline
 This pipeline tends to fail in the following situations:
-*Low lights like at night, under bridges, inside tunnels or heavy cloud
-*Poorly  paited lanes
-*Zigzag curvy roads (like snakes)
+* Low lights like at night, under bridges, inside tunnels or heavy cloud
+* Poorly  paited lanes
+* Zigzag curvy roads (like snakes)
 
 #### Further improvements
 This pipeline can definitely be improved by following considerations:
