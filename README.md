@@ -153,7 +153,7 @@ The code for my perspective transform is defined in the `Camera` class.  I chose
 src = np.float32([[433, 563], [866, 563], [1041, 675], [280, 675]])
 dst = np.float32([[280, 565], [1042, 563], [1041, 675], [280, 675]])
 ```
-I used the `set_matrix()` and `warp()` method in the following manner in code cell 6 and 7 of the ipynb notebook:
+I used the `set_matrix()` and `warp()` method in the following manner in code cell 2 and 6 of the ipynb notebook:
 
 ```python
 import numpy as np
