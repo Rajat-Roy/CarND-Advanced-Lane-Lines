@@ -95,13 +95,13 @@ and obtained this result:
 
 #### 1. Provide an example of a distortion-corrected image.
 
-To demonstrate this step, I will describe how I apply the distortion correction to this image 
+To demonstrate this step, I will describe how I apply the distortion correction to this image.
 
 (note: this is not actually from one of the test images):
 
 ![alt text][image2]
 
-Cell 3 of the ipynb notebook contains the code:
+Code cell 3 of the ipynb notebook contains the code:
 ```python
 test_img = mpimg.imread('test_images/signs_vehicles_xygrad.png')
 undistorted = camera.undistort(test_img)
@@ -199,12 +199,12 @@ I verified that my perspective transform was working as expected by applying it 
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
-lane-pixel methods are defined in the `LaneProcessor` class of the  [./lane.py](https://github.com/Rajat-Roy/CarND-Advanced-Lane-Lines/edit/master/lane.py) file.
+Lane-pixel methods are defined in the `LaneProcessor` class of the  [./lane.py](https://github.com/Rajat-Roy/CarND-Advanced-Lane-Lines/edit/master/lane.py) file.
 I used the `find_lane_pixels()` method to find the fist set of lane pixels, which uses the window technique to find pixels from thresholded binary image and fits a second order polynomial.
 
 Then I used the `search_around_poly()` method to find the lane pixels of the subsequent frames using previous fits and get new fits.
 
-To verify that it is working as expected I tested it on a test image in the 7th code cell of the ipynb notebook as follows:
+To verify that it is working as expected, I applied it on a test image in the 7th code cell of the ipynb notebook as follows:
 
 ```python
 import lane
@@ -247,7 +247,7 @@ Radius of curvature: 572.65 (m)
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
 I defined a `draw()` method in the `LaneProcessor` class to draw the lane area onto the undistorted image of the input image.
-Here is a demonstration of the visual implemented in code cell 9 of the ipynb notebook.
+Here is a demonstration of the visualization implemented in code cell 9 of the ipynb notebook.
 
 ```python
 laneProcessor.draw_img(camera.Minv)
@@ -283,11 +283,11 @@ Here's a [link to my video result](./project_video.mp4)
 
 Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further. 
 
-Although most of the functionalities were taken from chapter quizzes, some of the techniques had to be re adjusted for a better result.
+Although most of the functionalities were taken from chapter quizzes, some of the techniques had to be re-adjusted for better results.
 
 #### Color thresholding
 
-For some reason I was not satisfied with the thresholding of only S channel of the image. I opened up photoshop and played around and found that except for extreme cases S and L channel together produces a better thresholding when used with some specific image blending.
+For some reason I was not satisfied with the thresholding of only S channel of the image. I opened up photoshop and played around and found that except for extreme cases, S and L channel together produces a better thresholding when used with some specific image blending.
 
 I found the `Screen Blending` to be most useful. 
 This [page](http://www.deepskycolors.com/archive/2010/04/21/formulas-for-Photoshop-blending-modes.html) provided me with the formula:
@@ -332,15 +332,15 @@ def color_transform(self, img):
 When using prior frames for extrapolation of n fits and n last lane positions, I found that for the first n frames I had to fill up rest of the un-processed n values upto the data available.
 
 For example:
-* if data upto frame 1 is available fill 1st and rest (n-1)th data with frame 1 data
-* if data upto frame 2 is available fill frame 1 and frame 2 data in 1st and 2nd field and then copy frame 2 data to the rest of (n-2) fields
+* if data upto frame 1 is available, fill 1st and rest (n-1)th data with frame 1 data
+* if data upto frame 2 is available, fill frame 1 and frame 2 data in 1st and 2nd field respectively and then copy frame 2 data to the rest of (n-2) fields
 * and so on ...
 
 #### Limitations of the pipeline
 This pipeline tends to fail in the following situations:
 * Low lights like at night, under bridges, inside tunnels or heavy cloud
 * Poorly  paited lanes
-* Zigzag curvy roads (like snakes)
+* Zig-zag curvy roads (like snakes)
 
 #### Further improvements
 This pipeline can definitely be improved by following considerations:
