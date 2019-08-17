@@ -330,9 +330,9 @@ def color_transform(self, img):
 When using prior frames for extrapolation of n fits and n last lane positions, I found that for the first n frames I had to fill up rest of the un-processed n values upto the data available.
 
 For example:
-*if data upto frame 1 is available fill 1st and rest (n-1)th data with frame 1 data
-*if data upto frame 2 is available fill frame 1 and frame 2 data in 1st and 2nd field and then copy frame 2 data to the rest of (n-2) fields
-*and so on ...
+* if data upto frame 1 is available fill 1st and rest (n-1)th data with frame 1 data
+* if data upto frame 2 is available fill frame 1 and frame 2 data in 1st and 2nd field and then copy frame 2 data to the rest of (n-2) fields
+* and so on ...
 
 #### Limitations of the pipeline
 This pipeline tends to fail in the following situations:
